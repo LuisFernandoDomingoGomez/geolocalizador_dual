@@ -6,7 +6,7 @@
             <div class="header-body text-center mt-7 mb-7">
                 <div class="row justify-content-center">
                     <div class="col-lg-5 col-md-6">
-                        <img alt="Image placeholder" src="{{ asset('argon') }}/img/brand/logo.png" width="78%" height="100%">
+                        <img alt="Image placeholder" src="{{ asset('argon') }}/img/brand/logo.png" width="58%" height="100%">
                     </div>
                 </div>
             </div>
