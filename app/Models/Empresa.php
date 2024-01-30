@@ -13,4 +13,10 @@ class Empresa extends Model
 
     protected $perPage = 20;
     protected $fillable = ['name'];
+
+    // Relacion con Encuestas
+    public function encuestas()
+    {
+        return $this->hasMany('App\Models\encuesta', 'encuesta_id', 'id');
+    }
 }
