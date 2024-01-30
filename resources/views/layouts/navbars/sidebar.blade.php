@@ -82,18 +82,32 @@
                         <span class="nav-link-text" style="color: #000000;">{{ __('Perfil') }}
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('blogs.index') }}">
+                        <i class="ni ni-ruler-pencil"></i>
+                        <span class="nav-link-text" style="color: #000000;">{{ __('Encuesta de seguimiento') }}
+                    </a>
+                </li>
 
                 <li class="nav-item">
                     <a class="nav-link active" href="#navbar-reports" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="navbar-reports">
-                        <i class="ni ni-ruler-pencil" style="color: #000000;"></i>
-                        <span class="nav-link-text" style="color: #000000;">{{ __('Blogs') }}</span>
+                        <i class="ni ni-settings-gear-65" style="color: #000000;"></i>
+                        <span class="nav-link-text" style="color: #000000;">{{ __('Administracion') }}</span>
                     </a>
-
+                    <div class="collapse show" id="navbar-reports">
+                        <ul class="nav nav-sm flex-column">
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('empresas.index') }}">
+                                    {{ __('Empresas') }}
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
                     <div class="collapse show" id="navbar-reports">
                         <ul class="nav nav-sm flex-column">
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('blogs.index') }}">
-                                    {{ __('blogs') }}
+                                    {{ __('Reporte de seguimiento') }}
                                 </a>
                             </li>
                         </ul>

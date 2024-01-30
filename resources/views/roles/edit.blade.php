@@ -54,19 +54,27 @@
                             <div class="form-group">
                                 <label for="">Permisos para este Rol:</label>
                                 <br/>
-                                @foreach($permission as $value)
+                                <div class="permissions-container">
+                                    @foreach($permission as $value)
                                     <label>{{ Form::checkbox('permission[]', $value->id, in_array($value->id, $rolePermissions) ? true : false, array('class' => 'name')) }}
                                     {{ $value->name }}</label>
-                                <br/>
-                                @endforeach
+                                    @endforeach
+                                    <style>
+                                        .permissions-container {
+                                            display: flex;
+                                            flex-wrap: wrap;
+                                        }
+                                        .permissions-container label {
+                                            width: 50%; /* Cada label ocupa el 50% del contenedor */
+                                            box-sizing: border-box;
+                                        }
+                                    </style>
+                                </div>
                             </div>
+                            <button type="submit" class="btn btn-primary">Guardar</button>
                         </div>
-                        
-                        <button type="submit" class="btn btn-primary">Guardar</button>
-                        
                     </div>
                     {!! Form::close() !!}
-
                         </div>
                     </div>
                 </div>

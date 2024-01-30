@@ -4,17 +4,10 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-
-//agregamos el modelo de permisos de spatie
 use Spatie\Permission\Models\Permission;
 
 class SeederTablePermisos extends Seeder
 {
-    /**
-     * Run the database seeds.
-     *
-     * @return void
-     */
     public function run()
     {
         $permisos = [
@@ -34,7 +27,13 @@ class SeederTablePermisos extends Seeder
             'ver-blog',
             'crear-blog',
             'editar-blog',
-            'borrar-blog'
+            'borrar-blog',
+
+            //Operacions sobre tabla empresas
+            'ver-empresa',
+            'crear-empresa',
+            'editar-empresa',
+            'borrar-empresa'
         ];
 
         foreach($permisos as $permiso) {
