@@ -12,7 +12,7 @@ class Encuesta extends Model
     protected $perPage = 20;
 
     protected $fillable = [
-        'user_id',
+        'user_id', 
         'empresa_id',
         'latitud',
         'longitud',

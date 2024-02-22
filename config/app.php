@@ -196,6 +196,7 @@ return [
         App\Providers\RouteServiceProvider::class,
         // Spatie
         Spatie\Permission\PermissionServiceProvider::class,
+        Spatie\Geocoder\GeocoderServiceProvider::class,
 
     ],
 
@@ -212,6 +213,7 @@ return [
 
     'aliases' => Facade::defaultAliases()->merge([
         // 'ExampleClass' => App\Example\ExampleClass::class,
+        'Geocoder' => Spatie\Geocoder\Facades\Geocoder::class,
     ])->toArray(),
 
 ];

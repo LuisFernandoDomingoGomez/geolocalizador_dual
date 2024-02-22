@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('encuestas', function (Blueprint $table) {
             $table->engine = 'InnoDB';
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('user_id'); // Agregar este campo para vincular al usuario que crea el recurso
+            $table->unsignedBigInteger('user_id')->nullable(); // Agregar este campo para vincular al usuario que crea el recurso
             $table->unsignedBigInteger('empresa_id');
             $table->decimal('latitud', 10, 8); // Campo para almacenar la latitud
             $table->decimal('longitud', 11, 8); // Campo para almacenar la longitud

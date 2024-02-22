@@ -83,7 +83,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('blogs.index') }}">
+                    <a class="nav-link" href="{{ route('encuestas.index') }}">
                         <i class="ni ni-ruler-pencil"></i>
                         <span class="nav-link-text" style="color: #000000;">{{ __('Encuesta de seguimiento') }}
                     </a>

@@ -17,6 +17,6 @@ class Empresa extends Model
     // Relacion con Encuestas
     public function encuestas()
     {
-        return $this->hasMany('App\Models\encuesta', 'encuesta_id', 'id');
+        return $this->hasMany('App\Models\Encuesta', 'encuesta_id', 'id');
     }
 }
