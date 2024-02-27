@@ -58,6 +58,13 @@ class EncuestaController extends Controller
         ->with('success', 'Tu registro se ha enviado a tus tutores.');
 }
 
+    public function show($id)
+    {
+        $encuesta = Encuesta::find($id);
+
+        return view('encuesta.show', compact('encuesta'));
+    }
+
 
     public function destroy($id)
     {

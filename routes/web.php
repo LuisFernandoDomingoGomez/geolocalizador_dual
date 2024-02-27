@@ -42,5 +42,6 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::resource('blogs', App\Http\Controllers\BlogController::class);
 	Route::resource('empresas', App\Http\Controllers\EmpresaController::class);
 	Route::resource('encuestas', App\Http\Controllers\EncuestaController::class);
+	Route::resource('reportes', App\Http\Controllers\ReporteController::class);
 });
 

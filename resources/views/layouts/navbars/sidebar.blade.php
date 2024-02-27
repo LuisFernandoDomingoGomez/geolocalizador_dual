@@ -106,7 +106,7 @@
                     <div class="collapse show" id="navbar-reports">
                         <ul class="nav nav-sm flex-column">
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('blogs.index') }}">
+                                <a class="nav-link" href="{{ route('reportes.index') }}">
                                     {{ __('Reporte de seguimiento') }}
                                 </a>
                             </li>
