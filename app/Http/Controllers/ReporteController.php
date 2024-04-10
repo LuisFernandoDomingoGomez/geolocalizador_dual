@@ -14,6 +14,12 @@ use Maatwebsite\Excel\Facades\Excel;
 
 class ReporteController extends Controller
 {
+    function __construct()
+    {
+        $this->middleware('permission:ver-reporte')->only('index');
+        $this->middleware('permission:generar-listados-reportes', ['only' => ['pdf','export']]);
+    }
+
     public function index(Request $request)
     {
         $query = Encuesta::query();

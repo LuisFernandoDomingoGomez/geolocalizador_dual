@@ -16,6 +16,15 @@ use Maatwebsite\Excel\Facades\Excel;
 
 class EncuestaController extends Controller
 {
+    function __construct()
+    {
+        $this->middleware('permission:ver-encuesta|crear-encuesta|editar-encuesta|borrar-encuesta')->only('index');
+        $this->middleware('permission:crear-encuesta', ['only' => ['create','store']]);
+        $this->middleware('permission:editar-encuesta', ['only' => ['edit','update']]);
+        $this->middleware('permission:borrar-encuesta', ['only' => ['destroy']]);
+        $this->middleware('permission:generar-listados-encuestas', ['only' => ['pdf','export']]);
+    }
+
     public function index()
     {
         $user = Auth::user();
