@@ -36,8 +36,18 @@
                                 </span>
 
                                 <div class="float-right">
+                                    <div class="dropdown">
+                                        <button class="btn btn-primary btn-sm dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <i class="fas fa-file"></i> Exportar
+                                        </button>
+                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                            <a class="dropdown-item" href="{{ route('encuesta.pdf') }}"><i class="fas fa-file-pdf"></i> PDF</a>
+                                            <a class="dropdown-item" href="{{ route('encuesta.export') }}"><i class="fas fa-file-excel"></i> Excel</a>
+                                        </div>
+                                    </div>
+
                                     <a href="{{ route('encuestas.create') }}" class="btn btn-primary btn-sm float-right"  data-placement="left">
-                                    {{ __('Realizar encuesta') }}
+                                    {{ __('Crear Nuevo') }}
                                     </a>
                                 </div>
                             </div>
@@ -54,6 +64,8 @@
                                     <thead class="thead">
                                         <tr>
                                             <th>No</th>
+                                            <th>Fecha</th>
+                                            <th>Hora</th>
                                             <th>Nombre</th>
                                             <th>Empresa</th>
                                             <th>Latitud</th>
@@ -65,6 +77,8 @@
                                         @foreach ($encuestas as $encuesta)
                                             <tr>
                                                 <td>{{ ++$i }}</td>
+                                                <td>{{ $encuesta->created_at->isoFormat('D [de] MMMM [de] Y') }}</td>
+                                                <td>{{ $encuesta->created_at->format('h:i A') }}</td>
                                                 <td>{{ $encuesta->user->name }}</td>
                                                 <td>{{ $encuesta->empresa->name }}</td>
                                                 <td>{{ $encuesta->latitud }}</td>

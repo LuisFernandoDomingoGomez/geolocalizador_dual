@@ -30,10 +30,28 @@
                     <div class="card">
                         <div class="card-header">
                             <div style="display: flex; justify-content: space-between; align-items: center;">
+
                                 <span id="card_title">
                                     {{ __('Registros') }}
                                 </span>
+
+                                <div class="float-right">
+                                    <div class="dropdown">
+                                        <button class="btn btn-primary btn-sm dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <i class="fas fa-file"></i> Reportes
+                                        </button>
+                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                            <a class="dropdown-item" href="{{ route('reporte.pdf') }}"><i class="fas fa-file-pdf"></i> Reporte general</a>
+                                            <a class="dropdown-item" href="{{ route('reporte.export') }}"><i class="fas fa-file-excel"></i> Reporte por alumno</a>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
+                            <br>
+                            <form class="d-flex" action="{{ route('reportes.index') }}" method="GET">
+                                <input class="form-control me-2" type="text" name="search" placeholder="Búsqueda" aria-label="Search">
+                                <button class="btn btn-outline-success" type="submit">Buscar</button>
+                            </form>
                         </div>
                         @if ($message = Session::get('success'))
                             <div class="alert alert-success">
@@ -47,10 +65,10 @@
                                     <thead class="thead">
                                         <tr>
                                             <th>No</th>
-                                            <th>Nombre</th>
-                                            <th>Empresa</th>
                                             <th>Fecha</th>
                                             <th>Hora</th>
+                                            <th>Nombre</th>
+                                            <th>Empresa</th>
                                             <th>Latitud</th>
                                             <th>Longitud</th>
                                             <th>Acciones</th>
@@ -60,10 +78,10 @@
                                         @foreach ($encuestas as $encuesta)
                                             <tr>
                                                 <td>{{ ++$i }}</td>
+                                                <td>{{ $encuesta->created_at->format('d/m/Y') }}</td>
+                                                <td>{{ $encuesta->created_at->format('h:i A') }}</td>
                                                 <td>{{ $encuesta->user->name }}</td>
                                                 <td>{{ $encuesta->empresa->name }}</td>
-                                                <td>{{ $encuesta->created_at->format('Y-m-d') }}</td>
-                                                <td>{{ $encuesta->created_at->toTimeString() }}</td>
                                                 <td>{{ $encuesta->latitud }}</td>
                                                 <td>{{ $encuesta->longitud }}</td>
                                                 <td>

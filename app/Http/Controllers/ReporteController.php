@@ -5,15 +5,47 @@ namespace App\Http\Controllers;
 use App\Models\Encuesta;
 use App\Models\Empresa;
 use Illuminate\Http\Request;
-use Spatie\Geocoder\Facades\Geocoder; // Importa la fachada Geocoder
+use Spatie\Geocoder\Facades\Geocoder;
+use PDF;
+use Carbon\Carbon;
+
+use App\Exports\ReportesExport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class ReporteController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $encuestas = Encuesta::paginate(10);
+        $query = Encuesta::query();
 
-        return view('reporte.index', compact('encuestas'))
-            ->with('i', (request()->input('page', 1) - 1) * $encuestas->perPage());
+        $search = $request->input('search');
+
+        if ($search) {
+            $query->whereHas('user', function($query) use ($search) {
+                $query->where('name', 'like', "%$search%");
+            })->orWhereHas('empresa', function($query) use ($search) {
+                $query->where('name', 'like', "%$search%");
+            });
+        }
+
+        $encuestas = $query->orderBy('created_at', 'desc')->paginate(10);
+
+        return view('reporte.index', compact('encuestas', 'search'))
+            ->with('i', ($encuestas->currentPage() - 1) * $encuestas->perPage());
+    }
+
+    public function pdf()
+    {
+        $encuestasPorMes = Encuesta::orderBy('created_at')->get()->groupBy(function($date) {
+            return Carbon::parse($date->created_at)->format('Y-m');
+        });
+    
+        $pdf = PDF::loadView('reporte.pdf', compact('encuestasPorMes'));
+        return $pdf->stream();
+    }
+
+    public function export()
+    {
+        return Excel::download(new ReportesExport, 'reporte.xlsx');
     }
 }

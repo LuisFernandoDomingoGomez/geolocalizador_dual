@@ -5,16 +5,46 @@ namespace App\Http\Controllers;
 use App\Models\Encuesta;
 use App\Models\Empresa;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Spatie\Geocoder\Facades\Geocoder; // Importa la fachada Geocoder
+
+use PDF;
+use Carbon\Carbon;
+
+use App\Exports\EncuestasExport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class EncuestaController extends Controller
 {
     public function index()
     {
-        $encuestas = Encuesta::paginate(10);
+        $user = Auth::user();
+        $encuestas = Encuesta::where('user_id', $user->id)
+                            ->orderBy('created_at', 'desc')
+                            ->paginate(10);
 
         return view('encuesta.index', compact('encuestas'))
             ->with('i', (request()->input('page', 1) - 1) * $encuestas->perPage());
+    }
+
+    public function pdf()
+    {
+        $user_id = auth()->id();
+        $encuestasPorMes = Encuesta::where('user_id', $user_id)
+                                    ->orderBy('created_at')
+                                    ->get()
+                                    ->groupBy(function($date) {
+                                        return Carbon::parse($date->created_at)->format('Y-m');
+                                    });
+    
+        $pdf = PDF::loadView('encuesta.pdf', compact('encuestasPorMes'));
+        return $pdf->stream();
+    }
+    
+
+    public function export()
+    {
+        return Excel::download(new EncuestasExport, 'encuesta.xlsx');
     }
 
     public function create()

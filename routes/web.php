@@ -43,5 +43,13 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::resource('empresas', App\Http\Controllers\EmpresaController::class);
 	Route::resource('encuestas', App\Http\Controllers\EncuestaController::class);
 	Route::resource('reportes', App\Http\Controllers\ReporteController::class);
+
+	//Exportaciones de excel
+	Route::get('encuesta.export', 'App\Http\Controllers\EncuestaController@export')->name('encuesta.export');
+	Route::get('reporte.export', 'App\Http\Controllers\ReporteController@export')->name('reporte.export');
+
+	//Exportaciones PDF
+	Route::get('encuesta.pdf', 'App\Http\Controllers\EncuestaController@pdf')->name('encuesta.pdf');
+	Route::get('reporte.pdf', 'App\Http\Controllers\ReporteController@pdf')->name('reporte.pdf');
 });
 
