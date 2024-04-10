@@ -199,6 +199,7 @@ return [
         Spatie\Geocoder\GeocoderServiceProvider::class,
 
         Barryvdh\DomPDF\ServiceProvider::class,
+        Ladumor\LaravelPwa\PWAServiceProvider::class,
 
     ],
 
@@ -217,6 +218,8 @@ return [
         // 'ExampleClass' => App\Example\ExampleClass::class,
         'Geocoder' => Spatie\Geocoder\Facades\Geocoder::class,
         'PDF' => Barryvdh\DomPDF\Facade::class,
+        'LaravelPwa' => \Ladumor\LaravelPwa\LaravelPwa::class,
+        
     ])->toArray(),
 
 ];
