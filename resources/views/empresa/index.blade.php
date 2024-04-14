@@ -54,6 +54,7 @@
                                     <thead class="thead">
                                         <tr>
                                             <th>No</th>
+                                            <td>Imagen</td>
                                             <th>Nombre</th>
                                             <th>Acciones</th>
                                         </tr>
@@ -62,6 +63,7 @@
                                         @foreach ($empresas as $empresa)
                                             <tr>
                                                 <td>{{ ++$i }}</td>
+                                                <td><img src="{{asset($empresa->imagen)}}" style="width: 45px; height: 45px;"></td>
                                                 <td>{{ $empresa->name }}</td>
                                                 <td>
                                                     <form action="{{ route('empresas.destroy',$empresa->id) }}" method="POST">

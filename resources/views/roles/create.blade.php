@@ -55,6 +55,9 @@
                             <div class="form-group">
                                 <label for="">Permisos para este Rol:</label>
                                 <br/>
+                                <!-- Botón Check All -->
+                                <button type="button" id="checkAllBtn" class="btn btn-success">Marcar Todo</button>
+                                <br/><br/>
                                 <div class="permissions-container">
                                     @foreach($permission as $value)
                                         <label>{{ Form::checkbox('permission[]', $value->id, false, array('class' => 'name')) }}
@@ -70,6 +73,17 @@
                                             box-sizing: border-box;
                                         }
                                     </style>
+                                    <script>
+                                        // Función para marcar todas las casillas de verificación
+                                        document.getElementById('checkAllBtn').addEventListener('click', function() {
+                                            // Obtenemos todas las casillas de verificación dentro del contenedor de permisos
+                                            var checkboxes = document.querySelectorAll('.permissions-container input[type="checkbox"]');
+                                            // Iteramos sobre ellas y las marcamos
+                                            checkboxes.forEach(function(checkbox) {
+                                                checkbox.checked = true;
+                                            });
+                                        });
+                                    </script>
                                 </div>
                             </div>
                         </div>        

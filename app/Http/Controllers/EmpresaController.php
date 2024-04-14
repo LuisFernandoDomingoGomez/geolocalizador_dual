@@ -23,29 +23,34 @@ class EmpresaController extends Controller
             ->with('i', (request()->input('page', 1) - 1) * $empresas->perPage());
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         $empresa = new Empresa();
         return view('empresa.create', compact('empresa'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
-     */
+
     public function store(Request $request)
     {
-        request()->validate(Empresa::$rules);
+        $request->validate([
+            'name' => 'required',
+            'imagen' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
+        ]);
 
-        $empresa = Empresa::create($request->all());
+        // Crear una nueva instancia de Empresa
+        $empresa = new Empresa();
+        $empresa->name = $request->input('name'); // Asignar el nombre
 
+        $imagen = $request->file('imagen');
+        $imagenNombre = $imagen->getClientOriginalName();
+        $imagen->storeAs('img_empresas', $imagenNombre, 'public'); // Guardar en la carpeta "img_empresas" en el disco público
+
+        // Guardar la imagen en la carpeta "img_empresas"
+        $imagen->move(public_path('img_empresas'), $imagenNombre);
+        $empresa->imagen = 'img_empresas/' . $imagenNombre;
+
+        $empresa->save();
+    
         return redirect()->route('empresas.index')
             ->with('success', 'Empresa creada con exito.');
     }
